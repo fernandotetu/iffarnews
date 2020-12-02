@@ -4,8 +4,14 @@ class Noticia extends StatelessWidget {
   var titulo;
   var dataHora;
   var preview;
+  String img;
 
-  Noticia(this.titulo, this.dataHora, this.preview);
+  Noticia(this.img, this.titulo, this.dataHora, this.preview) {
+    if (this.img.isEmpty) {
+      this.img =
+          'https://miro.medium.com/max/3000/1*nT-QbKDbz06OoS3xzpvcAQ.jpeg';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,18 +25,28 @@ class Noticia extends StatelessWidget {
           children: [
             FadeInImage(
               placeholder: AssetImage('assets/imgs/loadind.gif'),
-              image: NetworkImage(
-                  'https://miro.medium.com/max/3000/1*nT-QbKDbz06OoS3xzpvcAQ.jpeg'),
+              image: NetworkImage(this.img),
               width: 120,
             ),
-            Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Text(this.titulo,
-                    style: TextStyle(fontWeight: FontWeight.bold)),
-                Text(this.dataHora),
-                Text(this.preview)
-              ],
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    this.titulo,
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                  ),
+                  Text(this.dataHora),
+                  Text(
+                    this.preview,
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 2,
+                  )
+                ],
+              ),
             )
           ],
         ),
