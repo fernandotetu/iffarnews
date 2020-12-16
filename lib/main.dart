@@ -4,6 +4,8 @@ import 'package:IFFarNew/noticia.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'noticia_detalhes.dart';
+
 void main() {
   runApp(new IFFarApp());
 }
@@ -16,6 +18,9 @@ class IFFarApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
+      routes: {
+        'detalhes': (_) => NoticiaDetalhe(),
+      },
       home: Scaffold(
         appBar: AppBar(
           title: Text("IFFarNews "),

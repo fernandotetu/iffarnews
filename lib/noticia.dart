@@ -1,3 +1,5 @@
+import 'package:IFFarNew/noticia_detalhes.dart';
+import 'package:IFFarNew/noticia_model.dart';
 import 'package:flutter/material.dart';
 
 class Noticia extends StatelessWidget {
@@ -15,40 +17,52 @@ class Noticia extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      margin: EdgeInsets.all(10),
-      child: Material(
-        elevation: 2,
-        borderRadius: BorderRadius.circular(10),
-        color: Colors.green,
-        child: Row(
-          children: [
-            FadeInImage(
-              placeholder: AssetImage('assets/imgs/loadind.gif'),
-              image: NetworkImage(this.img),
-              width: 120,
-            ),
-            Expanded(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    this.titulo,
-                    style: TextStyle(fontWeight: FontWeight.bold),
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 1,
-                  ),
-                  Text(this.dataHora),
-                  Text(
-                    this.preview,
-                    overflow: TextOverflow.ellipsis,
-                    maxLines: 2,
-                  )
-                ],
+    return GestureDetector(
+      onTap: () {
+        // Navigator.of(context).push(
+        //   MaterialPageRoute(builder: (context) => NoticiaDetalhe()),
+        // );
+        Navigator.of(context).pushNamed(
+          'detalhes',
+          arguments:
+              NoticiaModel(this.titulo, this.dataHora, this.preview, this.img),
+        );
+      },
+      child: Container(
+        margin: EdgeInsets.all(10),
+        child: Material(
+          elevation: 2,
+          borderRadius: BorderRadius.circular(10),
+          color: Colors.green,
+          child: Row(
+            children: [
+              FadeInImage(
+                placeholder: AssetImage('assets/imgs/loadind.gif'),
+                image: NetworkImage(this.img),
+                width: 120,
               ),
-            )
-          ],
+              Expanded(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      this.titulo,
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 1,
+                    ),
+                    Text(this.dataHora),
+                    Text(
+                      this.preview,
+                      overflow: TextOverflow.ellipsis,
+                      maxLines: 2,
+                    )
+                  ],
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
